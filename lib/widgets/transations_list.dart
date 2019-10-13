@@ -9,23 +9,23 @@ class TransationsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 450,
-        child: transactions.isEmpty
-            ? Column(
+    return  transactions.isEmpty
+            ? LayoutBuilder(builder: (ctx , constraints){
+              return Column(
                 children: <Widget>[
                   Text('NO AVAILABLE TRANSACTIONS'),
                   SizedBox(
                     height: 10,
                   ),
                   Container(
-                      height: 200,
+                      height: constraints.maxHeight * 0.6,
                       child: Image.asset(
                         'assets/images/waiting.png',
                         fit: BoxFit.cover,
                       ))
                 ],
-              )
+              );
+            })
             : ListView.builder(
                 itemBuilder: (ctx, i) {
                   return Card(
@@ -56,6 +56,6 @@ class TransationsList extends StatelessWidget {
                   );
                 },
                 itemCount: transactions.length,
-              ));
+              );
   }
 }
